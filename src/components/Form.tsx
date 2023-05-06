@@ -3,13 +3,13 @@
 //import { useState } from "react";
 
 type FormPropsType = {
-	setCity: React.Dispatch<React.SetStateAction<String>>;
+	setCity: React.Dispatch<React.SetStateAction<string | undefined>>;
 	getWeather: (e: any) => Promise<void>;
 };
 
-const Form = (props: any) => {
+const Form = (props: FormPropsType) => {
 
-//	const [city, setCity] = useState<String>();
+//	const [city, setCity] = useState<string>();
 //
 //	const getWeather = async (e: any) => {
 //		await e.preventDefault();
