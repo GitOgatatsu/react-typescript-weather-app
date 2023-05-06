@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Title from './components/Title';
 import Form from './components/Form';
-import Result from './components/Result';
+import Results from './components/Results';
 
 import './App.css';
 
@@ -46,7 +46,7 @@ function App() {
 			<div className="container">
 				<Title />
 				<Form setCity={setCity} getWeather={getWeather} />
-				<Result results={results} />
+				<Results results={results} />
 			</div>
 		</div>
   );
