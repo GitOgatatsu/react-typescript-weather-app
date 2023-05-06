@@ -25,9 +25,9 @@ function App() {
 		icon: ""
 	});
 
-	const getWeather = async (e: any) => {
+	const getWeather = async (e: React.FormEvent<HTMLFormElement>) => {
 		await e.preventDefault();
-		await fetch("https://api.weatherapi.com/v1/current.json?key=3313f751bedb4a2996e105911230505&q=London&aqi=no")
+		await fetch(`https://api.weatherapi.com/v1/current.json?key=3313f751bedb4a2996e105911230505&q=${city}&aqi=no`)
 			.then(res => res.json())
 			.then(data => {
 				setResults({
@@ -38,13 +38,16 @@ function App() {
 					icon: data.current.condition.icon
 				});
 			});
+//		console.log(results);
 	};
 
   return (
-		<div className="test">
-			<Title />
-			<Form setCity={setCity} getWeather={getWeather} />
-			<Result results={results} />
+		<div className="wrapper">
+			<div className="container">
+				<Title />
+				<Form setCity={setCity} getWeather={getWeather} />
+				<Result results={results} />
+			</div>
 		</div>
   );
 }
