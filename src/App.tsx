@@ -3,6 +3,7 @@ import { useState } from "react";
 import Title from './components/Title';
 import Form from './components/Form';
 import Results from './components/Results';
+import Loading from "./components/Loading";
 
 import './App.css';
 
@@ -24,9 +25,11 @@ function App() {
 		conditionText: "",
 		icon: ""
 	});
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const getWeather = async (e: React.FormEvent<HTMLFormElement>) => {
-		await e.preventDefault();
+		e.preventDefault();
+		setLoading(true);
 		await fetch(`https://api.weatherapi.com/v1/current.json?key=3313f751bedb4a2996e105911230505&q=${city}&aqi=no`)
 			.then(res => res.json())
 			.then(data => {
@@ -38,6 +41,7 @@ function App() {
 					icon: data.current.condition.icon
 				});
 				setCity("");
+				setLoading(false);
 			})
 			.catch(err => alert("エラーが発生しました。ページをリロードしてください。"));
 //		console.log(results);
@@ -48,7 +52,7 @@ function App() {
 			<div className="container">
 				<Title />
 				<Form setCity={setCity} getWeather={getWeather} city={city} />
-				<Results results={results} />
+				{loading ? <Loading /> : <Results results={results} />}
 			</div>
 		</div>
   );
